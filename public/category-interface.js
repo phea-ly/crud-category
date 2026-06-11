@@ -217,7 +217,6 @@ async function deleteCategory(id) {
 }
 
 elements.openCreateBtn?.addEventListener('click', () => openModal());
-
 elements.modalForm?.addEventListener('submit', saveCategory);
 
 elements.modal?.addEventListener('click', (event) => {

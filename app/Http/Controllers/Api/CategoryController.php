@@ -21,7 +21,10 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'is_active' => 'sometimes|boolean',
         ]);
+
+        $validated['is_active'] = $request->boolean('is_active', true);
 
         $category = Category::create($validated);
 
@@ -38,7 +41,12 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'is_active' => 'sometimes|boolean',
         ]);
+
+        $validated['is_active'] = $request->has('is_active')
+            ? $request->boolean('is_active')
+            : $category->is_active;
 
         $category->update($validated);
 
